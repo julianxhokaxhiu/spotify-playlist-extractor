@@ -5,7 +5,7 @@ Bring back the freedom of choice to users. Let them export their playlist, whene
 
 Be fair.
 
-["Nothing is an absolute reality, all is permitted"](http://en.wikipedia.org/wiki/Alamut_(1938_novel)) ~ Alamut, 1938
+["Nothing is an absolute reality, all is permitted"](http://en.wikipedia.org/wiki/Alamut_\(1938_novel\)) ~ Alamut, 1938
 
 ## How to use
 * Download the Chrome Extension from the [Google Chrome Extension gallery](https://chrome.google.com/webstore/detail/spotify-playlist-extracto/onglffcjldphmpfnpdfmngfenhmjlnnn)
