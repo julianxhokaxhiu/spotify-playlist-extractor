@@ -2,7 +2,7 @@
     "manifest_version" : 2,
     "author": "Julian Xhokaxhiu < http://julianxhokaxhiu.com >",
     "name" : "Spotify Playlist Extractor",
-    "version" : "0.1",
+    "version" : "0.2",
     "description" : "Extract your playlists safely with a 1-click solution!",
     "permissions": [
         "tabs",
@@ -10,7 +10,7 @@
     ],
     "background" : {
         "scripts" : [
-            "js/jquery-2.0.3.min.js",
+            "js/jquery-2.1.0.min.js",
             "js/app.js",
             "js/background.js"
         ]
@@ -34,7 +34,7 @@
                 "https://play.spotify.com/*"
             ],
             "js" : [
-                "js/jquery-2.0.3.min.js",
+                "js/jquery-2.1.0.min.js",
                 "js/app.js",
                 "js/spdl.js"
             ],

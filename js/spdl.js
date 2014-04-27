@@ -25,30 +25,32 @@ jQuery(function($){
     var userPlaylist = {};
     var getItems = function(){
         var scrollTime = 5;
-        var playlistView = $('#section-playlist iframe').contents().find('.pf-playlist-view');
+        var playlistView = $('#section-collection iframe').contents().find('#pf-playlist-view');
         // Get Items
-        var playlistItems = playlistView.find('.sp-list-item').each(function(i, item){
+        var playlistItems = playlistView.find('.tl-row').each(function(i, item){
             item = $(item);
-            if(!userPlaylist[item.data('uri')]) userPlaylist[item.data('uri')] = {
-                'title': item.find('.sp-list-cell-track-name').text(),
-                'artistURI': item.find('.sp-list-cell-artist a').data('uri'),
-                'artist': item.find('.sp-list-cell-artist a').text(),
-                'albumURI': item.find('.sp-list-cell-album a').data('uri'),
-                'album': item.find('.sp-list-cell-album a').text()
+            userPlaylist[item.data('uri')] = {
+                'title': item.find('.tl-name .tl-highlight').text(),
+                'artistURI': item.find('.tl-artists a').data('uri'),
+                'artist': item.find('.tl-artists a').text(),
+                'albumURI': item.find('.tl-albums a').data('uri'),
+                'album': item.find('.tl-albums a').text()
             }
         });
         GLOBAL.info('Got ' + playlistItems.length + ' items. Continue to scrap in ' + scrollTime + ' seconds...');
 
         // Calculate TOP offset
-        var header = playlistView.find('header.pf-header');
-        var rowListHeaders = playlistView.find('.sp-list-header');
-        var lastItem = playlistItems.last();
-        var totalHeight = playlistView.find('.sp-list-wrapper').outerHeight() + header.outerHeight();
-        if( playlistView.scrollTop() + $(window).height() < totalHeight ){
-            playlistView.scrollTop( header.outerHeight() + rowListHeaders.outerHeight() + ( lastItem.outerHeight() * parseInt(lastItem.find('.sp-list-listnumber').text()) ) );
+        var header = playlistView.find('header.header');
+        var rowListHeaders = playlistView.find('thead.tl-header');
+        var lastItem = playlistItems.filter(function(i){
+            $this = $(this);
+            return ( $this.find('.tl-name .tl-highlight').length == 0 );
+        }).first().prev();
+        if( lastItem.length ){
+            playlistView.scrollTop( header.outerHeight() + rowListHeaders.outerHeight() + ( lastItem.outerHeight() * parseInt(lastItem.data('index')) ) );
             setTimeout(getItems, scrollTime * 1000);
         } else {
-            GLOBAL.info('Done! Get ' + Object.keys(userPlaylist).length + ' items.', userPlaylist);
+            GLOBAL.info('Done! Got ' + Object.keys(userPlaylist).length + ' items.', userPlaylist);
             chrome.extension.sendMessage({
                 'items' : userPlaylist
             });
